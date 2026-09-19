@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seleção de Candidatos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Elemento para iluminação ambiente de fundo -->
+  <div class="bg-glow"></div>
+
+  <!-- Cartão Principal -->
+  <main class="card">
+    <header class="card-header">
+      <span class="badge">PROCESSO SELETIVO</span>
+      <h1>Validação de Perfil</h1>
+      <p>Preencha as informações abaixo para verificar sua elegibilidade à vaga.</p>
+    </header>
+
+    <form id="vagaForm" class="form">
+      <div class="field-group">
+        <label for="nome">Nome Completo</label>
+        <div class="input-wrapper">
+          <input type="text" id="nome" placeholder="Ex: Roberto Silva" required autocomplete="off">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field-group">
+          <label for="idade">Idade (anos)</label>
+          <div class="input-wrapper">
+            <input type="number" id="idade" placeholder="18" min="1" max="120" required>
+          </div>
+        </div>
+
+        <div class="field-group">
+          <label for="altura">Altura (metros)</label>
+          <div class="input-wrapper">
+            <input type="number" id="altura" step="0.01" placeholder="1.75" min="0.5" max="2.5" required>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-submit">
+        <span>Analisar Requisitos</span>
+      </button>
+    </form>
+  </main>
+
+  <!-- Popup / Modal de Resultado -->
+  <div id="modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="modal-box">
+      <button id="modalCloseX" class="modal-close-x" aria-label="Fechar">&times;</button>
+      <div id="modalIcon" class="modal-icon"></div>
+      <h3 id="modalTitle" class="modal-title">Resultado</h3>
+      <p id="modalMessage" class="modal-message"></p>
+      <button id="modalOkBtn" class="btn-modal">OK</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
