@@ -7,8 +7,16 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalMessage = document.getElementById('modalMessage');
   const modalOkBtn = document.getElementById('modalOkBtn');
   const modalCloseX = document.getElementById('modalCloseX');
+  const bloomOverlay = document.getElementById('bloomOverlay');
+  const sunflowerCursor = document.getElementById('sunflowerCursor');
 
-  // Evento ao enviar o formulário
+  // 1. SEGUIDOR DE MOUSE (GIRASSOL QUE SEGUE O PONTEIRO)
+  document.addEventListener('mousemove', (e) => {
+    sunflowerCursor.style.left = `${e.clientX}px`;
+    sunflowerCursor.style.top = `${e.clientY}px`;
+  });
+
+  // 2. SUBMISSÃO DO FORMULÁRIO E ANIMAÇÃO DE FLORESCIMENTO
   vagaForm.addEventListener('submit', (e) => {
     e.preventDefault();
 
@@ -16,52 +24,54 @@ document.addEventListener('DOMContentLoaded', () => {
     const idade = parseInt(document.getElementById('idade').value, 10);
     const altura = parseFloat(document.getElementById('altura').value);
 
-    // Validação dos critérios: Altura >= 1.70 E Idade >= 18
+    // Critério: Altura >= 1.70 e Idade >= 18
     const eApto = altura >= 1.70 && idade >= 18;
 
-    exibirModal(eApto, nome);
+    // Exibe o overlay do girassol florescendo
+    bloomOverlay.classList.remove('hidden');
+
+    // Aguarda a animação do girassol florescer (1.2 segundos) para exibir o Popup
+    setTimeout(() => {
+      bloomOverlay.classList.add('hidden');
+      exibirModal(eApto, nome);
+    }, 1200);
   });
 
-  // Função para configurar e abrir o Popup
+  // 3. EXIBIÇÃO DO POPUP / MODAL
   function exibirModal(apto, nome) {
-    // Limpa estados anteriores
     modalBox.classList.remove('sucesso', 'erro');
 
     if (apto) {
       modalBox.classList.add('sucesso');
-      modalIcon.textContent = '✓';
-      modalTitle.textContent = 'Elegível!';
-      modalMessage.textContent = `Parabéns ${nome}! Você pode prosseguir no processo para a vaga!`;
+      modalIcon.textContent = '🌻';
+      modalTitle.textContent = 'Aprovado(a)!';
+      modalMessage.textContent = 'Parabéns! Você pode prosseguir no processo para a vaga!';
     } else {
       modalBox.classList.add('erro');
-      modalIcon.textContent = '✕';
+      modalIcon.textContent = '🥀';
       modalTitle.textContent = 'Não Elegível';
-      modalMessage.textContent = 'Infelizmente você não é apto à vaga.';
+      modalMessage.textContent = 'Infelizmente você não é apto à vaga';
     }
 
-    // Exibe o popup removendo a classe ocultadora
     modal.classList.remove('hidden');
     modal.setAttribute('aria-hidden', 'false');
   }
 
-  // Função para fechar o Popup
+  // 4. FECHAR MODAL
   function fecharModal() {
     modal.classList.add('hidden');
     modal.setAttribute('aria-hidden', 'true');
   }
 
-  // Eventos para fechar o popup ao clicar no botão OK ou no X
   modalOkBtn.addEventListener('click', fecharModal);
   modalCloseX.addEventListener('click', fecharModal);
 
-  // Fechar o popup ao clicar fora da caixa central
   modal.addEventListener('click', (e) => {
     if (e.target === modal) {
       fecharModal();
     }
   });
 
-  // Fechar o popup ao pressionar a tecla ESC
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
       fecharModal();

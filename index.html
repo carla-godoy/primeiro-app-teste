@@ -3,27 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Seleção de Candidatos</title>
+  <title>Seleção de Candidatos - Campo de Girassóis</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- Elemento para iluminação ambiente de fundo -->
+  <!-- Elemento do Girassol que segue o ponteiro do mouse -->
+  <div id="sunflowerCursor" class="sunflower-cursor">🌻</div>
+
+  <!-- Iluminação solar ambiente no fundo -->
   <div class="bg-glow"></div>
 
-  <!-- Cartão Principal -->
+  <!-- Overlay de Animação: Girassol Florescendo antes do Popup -->
+  <div id="bloomOverlay" class="bloom-overlay hidden" aria-hidden="true">
+    <div class="bloom-flower">🌻</div>
+  </div>
+
+  <!-- Cartão Principal de Formulário -->
   <main class="card">
     <header class="card-header">
       <span class="badge">PROCESSO SELETIVO</span>
       <h1>Validação de Perfil</h1>
-      <p>Preencha as informações abaixo para verificar sua elegibilidade à vaga.</p>
+      <p>Preencha os campos abaixo para verificar sua elegibilidade à vaga.</p>
     </header>
 
     <form id="vagaForm" class="form">
       <div class="field-group">
         <label for="nome">Nome Completo</label>
         <div class="input-wrapper">
-          <input type="text" id="nome" placeholder="Ex: Roberto Silva" required autocomplete="off">
+          <input type="text" id="nome" placeholder="Ex: Maria Silva" required autocomplete="off">
         </div>
       </div>
 
@@ -31,14 +39,14 @@
         <div class="field-group">
           <label for="idade">Idade (anos)</label>
           <div class="input-wrapper">
-            <input type="number" id="idade" placeholder="18" min="1" max="120" required>
+            <input type="number" id="idade" placeholder="Ex: 20" min="0" max="120" required>
           </div>
         </div>
 
         <div class="field-group">
           <label for="altura">Altura (metros)</label>
           <div class="input-wrapper">
-            <input type="number" id="altura" step="0.01" placeholder="1.75" min="0.5" max="2.5" required>
+            <input type="number" id="altura" step="0.01" placeholder="Ex: 1.75" min="0.5" max="2.5" required>
           </div>
         </div>
       </div>
@@ -53,7 +61,7 @@
   <div id="modal" class="modal-overlay hidden" aria-hidden="true">
     <div class="modal-box">
       <button id="modalCloseX" class="modal-close-x" aria-label="Fechar">&times;</button>
-      <div id="modalIcon" class="modal-icon"></div>
+      <div id="modalIcon" class="modal-icon">🌻</div>
       <h3 id="modalTitle" class="modal-title">Resultado</h3>
       <p id="modalMessage" class="modal-message"></p>
       <button id="modalOkBtn" class="btn-modal">OK</button>
